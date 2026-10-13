@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý công việc cá nhân - Mini Task Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- TIÊU ĐỀ CHÍNH -->
+    <header class="app-header">
+      <div class="header-content">
+        <div class="header-icon">✨</div>
+        <div>
+          <h1>Quản Lý Công Việc Cá Nhân</h1>
+          <p class="subtitle">Mini Task Manager • Lập trình Web</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- BẢNG THỐNG KÊ (DASHBOARD STATS) -->
+    <section class="stats-grid">
+      <div class="stat-card stat-total">
+        <div class="stat-icon">📋</div>
+        <div class="stat-info">
+          <span class="stat-label">Tổng công việc</span>
+          <span class="stat-value" id="stat-total-count">0</span>
+        </div>
+      </div>
+
+      <div class="stat-card stat-pending">
+        <div class="stat-icon">⏳</div>
+        <div class="stat-info">
+          <span class="stat-label">Chưa hoàn thành</span>
+          <span class="stat-value" id="stat-pending-count">0</span>
+        </div>
+      </div>
+
+      <div class="stat-card stat-completed">
+        <div class="stat-icon">✅</div>
+        <div class="stat-info">
+          <span class="stat-label">Đã hoàn thành</span>
+          <span class="stat-value" id="stat-completed-count">0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORM THÊM CÔNG VIỆC -->
+    <section class="card form-section">
+      <div class="card-title-row">
+        <span class="title-bullet"></span>
+        <h2>Thêm công việc mới</h2>
+      </div>
+
+      <form id="task-form" novalidate>
+        <!-- Tên công việc (bắt buộc) -->
+        <div class="form-group">
+          <label for="task-name">Tên công việc <span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="task-name" 
+            placeholder="Nhập tên công việc cần làm..." 
+            autocomplete="off"
+          >
+          <small class="error-message" id="name-error"></small>
+        </div>
+
+        <div class="form-row">
+          <!-- Hạn hoàn thành (bắt buộc, định dạng dd/mm/yy hoặc dd/mm/yyyy) -->
+          <div class="form-group">
+            <label for="task-due-date">Hạn hoàn thành <span class="required">*</span> <span class="note">(dd/mm/yy &gt; hôm nay)</span></label>
+            <div class="date-input-container">
+              <input 
+                type="text" 
+                id="task-due-date" 
+                placeholder="dd/mm/yyyy (hoặc dd/mm/yy)" 
+                maxlength="10"
+                autocomplete="off"
+              >
+              <input type="date" id="native-date-picker" class="native-date-picker" title="Chọn từ lịch">
+            </div>
+            <small class="error-message" id="due-date-error"></small>
+          </div>
+
+          <!-- Mức ưu tiên (bắt buộc chọn) -->
+          <div class="form-group">
+            <label for="task-priority">Mức ưu tiên <span class="required">*</span></label>
+            <select id="task-priority">
+              <option value="" disabled selected>-- Chọn mức ưu tiên --</option>
+              <option value="Cao">🔴 Cao</option>
+              <option value="Trung bình">🟡 Trung bình</option>
+              <option value="Thấp">🟢 Thấp</option>
+            </select>
+            <small class="error-message" id="priority-error"></small>
+          </div>
+        </div>
+
+        <button type="submit" id="btn-add" class="btn btn-primary">
+          <span>+ Thêm công việc</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- CÔNG CỤ TÌM KIẾM, LỌC & SẮP XẾP -->
+    <section class="card filter-section">
+      <div class="filter-controls">
+        <div class="search-box">
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="🔍 Tìm kiếm theo tên (gõ có dấu hoặc không dấu)..."
+          >
+        </div>
+
+        <div class="filter-group">
+          <div class="control-item">
+            <label for="filter-status">Trạng thái:</label>
+            <select id="filter-status">
+              <option value="all">Tất cả</option>
+              <option value="pending">Chưa hoàn thành</option>
+              <option value="completed">Đã hoàn thành</option>
+            </select>
+          </div>
+
+          <div class="control-item">
+            <label for="sort-tasks">Sắp xếp:</label>
+            <select id="sort-tasks">
+              <option value="due-asc" selected>Hạn gần nhất trước</option>
+              <option value="due-desc">Hạn xa nhất trước</option>
+              <option value="newest">Mới tạo nhất</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DANH SÁCH CÔNG VIỆC -->
+    <section class="card list-section">
+      <div class="list-header">
+        <div class="card-title-row">
+          <span class="title-bullet"></span>
+          <h2>Danh sách công việc</h2>
+        </div>
+        <span id="task-count" class="badge-counter">0 công việc</span>
+      </div>
+
+      <ul id="task-list" class="task-list">
+        <!-- Render tự động bởi JavaScript -->
+      </ul>
+
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <div class="empty-icon">📭</div>
+        <p>Không có công việc nào phù hợp với bộ lọc!</p>
+      </div>
+    </section>
+
+    <!-- FOOTER THÔNG TIN SINH VIÊN (Cố định thông tin của bạn) -->
+    <footer class="app-footer">
+      <p class="student-info">
+        <strong>Họ và tên:</strong> Phạm Thị Thanh Ngân &nbsp;|&nbsp; 
+        <strong>MSSV:</strong> 224001736 &nbsp;|&nbsp; 
+        <strong>Lớp:</strong> TUD D2024
+      </p>
+      <p class="footer-note">Bài thực hành lập trình Web - Mini Task Manager</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

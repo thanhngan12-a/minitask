@@ -1,0 +1,606 @@
+/* Reset cơ bản và hệ thống biến màu sắc hiện đại */
+:root {
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-light: #e0e7ff;
+  --bg-page: #f1f5f9;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-sub: #64748b;
+  --border-color: #e2e8f0;
+  
+  --priority-cao: #ef4444;
+  --priority-cao-bg: #fef2f2;
+  --priority-tb: #f59e0b;
+  --priority-tb-bg: #fffbeb;
+  --priority-thap: #10b981;
+  --priority-thap-bg: #ecfdf5;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.5;
+  padding: 24px 16px;
+  min-height: 100vh;
+}
+
+/* Khung bọc ứng dụng */
+.app-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Header */
+.app-header {
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #818cf8 100%);
+  color: #ffffff;
+  padding: 22px 24px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-icon {
+  font-size: 2.2rem;
+  background: rgba(255, 255, 255, 0.2);
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+}
+
+.app-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.app-header .subtitle {
+  font-size: 0.9rem;
+  color: #e0e7ff;
+  margin-top: 2px;
+}
+
+/* BẢNG THỐNG KÊ (DASHBOARD STATS) */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+  font-size: 1.6rem;
+  padding: 8px;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--text-sub);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.stat-total .stat-value { color: var(--primary); }
+.stat-pending .stat-value { color: #f59e0b; }
+.stat-completed .stat-value { color: #10b981; }
+
+/* Thẻ chung (Card) */
+.card {
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.card-title-row h2 {
+  font-size: 1.12rem;
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.title-bullet {
+  width: 4px;
+  height: 18px;
+  background-color: var(--primary);
+  border-radius: 4px;
+}
+
+/* Form Styles */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  flex: 1;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.required {
+  color: #ef4444;
+}
+
+.note {
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: #64748b;
+}
+
+/* Input & Select */
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 0.925rem;
+  color: var(--text-main);
+  background-color: #f8fafc;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+input[type="text"]:focus,
+select:focus {
+  border-color: var(--primary);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* Date Input Container (hỗ trợ nhập dd/mm/yy kết hợp chọn lịch) */
+.date-input-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.date-input-container input[type="text"] {
+  padding-right: 44px;
+}
+
+.native-date-picker {
+  position: absolute;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  opacity: 0.7;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.native-date-picker:hover {
+  opacity: 1;
+}
+
+/* Thông báo lỗi */
+.error-message {
+  color: #ef4444;
+  font-size: 0.78rem;
+  margin-top: 4px;
+  font-weight: 500;
+  min-height: 18px;
+}
+
+input.input-error,
+select.input-error {
+  border-color: #ef4444 !important;
+  background-color: #fef2f2 !important;
+}
+
+/* Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 20px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  width: 100%;
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%);
+  box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* BỘ LỌC VÀ SẮP XẾP */
+.filter-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filter-group {
+  display: flex;
+  gap: 12px;
+}
+
+.control-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.control-item label {
+  margin-bottom: 0;
+  white-space: nowrap;
+  font-size: 0.825rem;
+}
+
+/* DANH SÁCH CÔNG VIỆC */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.list-header .card-title-row {
+  margin-bottom: 0;
+}
+
+.badge-counter {
+  font-size: 0.82rem;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Mỗi hàng công việc */
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-left: 5px solid #94a3b8;
+  transition: all 0.2s ease;
+}
+
+.task-item:hover {
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+/* Màu viền theo độ ưu tiên */
+.task-item.priority-cao {
+  border-left-color: var(--priority-cao);
+}
+
+.task-item.priority-trung-binh {
+  border-left-color: var(--priority-tb);
+}
+
+.task-item.priority-thap {
+  border-left-color: var(--priority-thap);
+}
+
+/* Khi đã hoàn thành */
+.task-item.completed {
+  background-color: #f8fafc;
+  opacity: 0.75;
+}
+
+.task-item.completed .task-title {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+.task-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.task-checkbox {
+  margin-top: 4px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--primary);
+}
+
+.task-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow: hidden;
+}
+
+.task-title {
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--text-main);
+  word-break: break-word;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: var(--text-sub);
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.badge-cao {
+  background-color: var(--priority-cao-bg);
+  color: var(--priority-cao);
+}
+
+.badge-trung-binh {
+  background-color: var(--priority-tb-bg);
+  color: var(--priority-tb);
+}
+
+.badge-thap {
+  background-color: var(--priority-thap-bg);
+  color: var(--priority-thap);
+}
+
+.badge-due {
+  background-color: #f1f5f9;
+  color: #334155;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.badge-status {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-status.pending {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.badge-status.completed {
+  background-color: #d1fae5;
+  color: #047857;
+}
+
+/* Nút xóa */
+.btn-delete {
+  background-color: #fff1f2;
+  color: #e11d48;
+  border: 1px solid #fecdd3;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-delete:hover {
+  background-color: #e11d48;
+  color: #ffffff;
+  border-color: #e11d48;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 28px 12px;
+  color: #94a3b8;
+}
+
+.empty-icon {
+  font-size: 2.2rem;
+  margin-bottom: 6px;
+}
+
+/* Footer cố định thông tin của bạn */
+.app-footer {
+  text-align: center;
+  padding: 16px 8px;
+  color: var(--text-sub);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: 6px;
+}
+
+.student-info {
+  font-weight: 500;
+  color: #334155;
+}
+
+.footer-note {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+/* Responsive trên điện thoại ~375px */
+@media (max-width: 480px) {
+  body {
+    padding: 10px 8px;
+  }
+
+  .app-header {
+    padding: 16px;
+  }
+
+  .header-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.6rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .stats-grid {
+    gap: 8px;
+  }
+
+  .stat-card {
+    padding: 10px 8px;
+    flex-direction: column;
+    text-align: center;
+    gap: 4px;
+  }
+
+  .stat-icon {
+    font-size: 1.3rem;
+    padding: 4px;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+  }
+
+  .card {
+    padding: 14px 12px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .filter-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .control-item {
+    justify-content: space-between;
+  }
+
+  .task-item {
+    align-items: flex-start;
+    padding: 12px 10px;
+  }
+
+  .btn-delete {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+}
